@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossier de Candidature & Formation — B.R.A.</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.85);
+            --border-color: rgba(234, 179, 8, 0.3);
+            --accent-gold: #fbbf24;
+            --accent-gold-glow: rgba(251, 191, 36, 0.4);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --danger-glow: rgba(239, 68, 68, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(251, 191, 36, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
+                linear-gradient(to bottom, #0b0f19, #030712);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            margin: 20px auto 0 auto;
+            box-shadow: 0 0 10px var(--accent-gold);
+        }
+
+        .badge-elite {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.1);
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffffff 30%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(251, 191, 36, 0.15);
+            border-color: rgba(251, 191, 36, 0.6);
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-gold);
+            box-shadow: 0 0 10px var(--accent-gold);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 15px;
+        }
+
+        /* Grille des prérequis */
+        .prereq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .prereq-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .prereq-item:hover {
+            background: rgba(251, 191, 36, 0.03);
+            border-color: rgba(251, 191, 36, 0.3);
+        }
+
+        .prereq-item h3 {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .prereq-item h3::before {
+            content: '❖';
+            color: var(--accent-gold);
+            font-size: 0.8rem;
+        }
+
+        .prereq-item p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Style des questions tactiques */
+        .tactical-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tactical-box {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 22px;
+            position: relative;
+        }
+
+        .tactical-box .q-number {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .tactical-box h3 {
+            font-size: 1.15rem;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .scenario-box {
+            background: rgba(59, 130, 246, 0.05);
+            border-left: 3px solid #3b82f6;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+            color: #d1d5db;
+            margin-bottom: 12px;
+        }
+
+        .question-box {
+            background: rgba(251, 191, 36, 0.03);
+            border: 1px dashed rgba(251, 191, 36, 0.3);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #f3f4f6;
+            font-style: italic;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .section-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <span class="badge-elite">Document Officiel &bull; Restreint</span>
+            <h1>Brigade de Recherche et d’Appui</h1>
+            <p class="subtitle">Formulaire de Candidature, Critères d'Intégration & Évaluation Tactique</p>
+        </header>
+
+        <!-- SECTION 1 : CRITERES -->
+        <section class="section-card">
+            <h2>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-gold);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                Section 1 : Prérequis et Critères d’Intégration
+            </h2>
+            <div class="prereq-grid">
+                <div class="prereq-item">
+                    <h3>Communications Radio</h3>
+                    <p>Maîtriser parfaitement les communications radio et assurer des calls propres, clairs et précis sur les secteurs Nord et Sud.</p>
+                </div>
+                <div class="prereq-item">
+                    <h3>Aptitude au Tir</h3>
+                    <p>Obtenir un minimum de 65 % de réussite au tir, avec un objectif vivement recommandé de 75 % ou plus.</p>
+                </div>
+                <div class="prereq-item">
+                    <h3>Maîtrise de soi</h3>
+                    <p>Faire preuve d'un sang-froid absolu lors des situations à haut risque, notamment durant les simulations de prise d’otage (validation direction requise).</p>
+                </div>
+                <div class="prereq-item">
+                    <h3>Gestion des 10.95</h3>
+                    <p>Gérer efficacement les 10.95, sélectionner les dispositifs adaptés tout en maintenant un flux radio rapide et compréhensible.</p>
+                </div>
+                <div class="prereq-item">
+                    <h3>Discipline & Comportement</h3>
+                    <p>Adopter une attitude irréprochable sur le terrain, faire preuve de sérieux et ne faire l’objet d'aucun avertissement disciplinaire.</p>
+                </div>
+                <div class="prereq-item">
+                    <h3>Qualifications Requises</h3>
+                    <p>Détenir impérativement les qualifications de pilote VIR / DART ainsi que la certification TIDE.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 : QUESTIONNAIRE TACTIQUE -->
+        <section class="section-card">
+            <h2>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-gold);"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                Section 2 : Questionnaire d'Évaluation Tactique (Ultimatum)
+            </h2>
+            
+            <div class="tactical-list">
+                
+                <div class="tactical-box">
+                    <div class="q-number">Question 01</div>
+                    <h3>Poursuite à haute vitesse</h3>
+                    <div class="scenario-box"><strong>Situation :</strong> Vous êtes en poursuite d’un véhicule à haute vitesse. Le suspect ouvre le feu sur les unités.</div>
+                    <div class="question-box"><strong>Question :</strong> À quel moment considérez-vous qu’une intervention plus offensive est nécessaire ?</div>
+                </div>
+
+                <div class="tactical-box">
+                    <div class="q-number">Question 02</div>
+                    <h3>Gestion des communications en situation critique</h3>
+                    <div class="scenario-box"><strong>Situation :</strong> Un agent effectue un mauvais call radio pendant une situation critique, créant de la confusion au sein des équipes.</div>
+                    <div class="question-box"><strong>Question :</strong> Comment réagissez-vous face à cette erreur pour rétablir l'ordre sur les ondes ?</div>
+                </div>
+
+                <div class="tactical-box">
+                    <div class="q-number">Question 03</div>
+                    <h3>Intervention sur Prise d'Otage (PO)</h3>
+                    <div class="scenario-box"><strong>Situation :</strong> Vous arrivez sur une PO impliquant plusieurs suspects retranchés.</div>
+                    <div class="question-box"><strong>Question :</strong> Quelle disposition tactique choisissez-vous de mettre en place et pourquoi ?</div>
+                </div>
+
+                <div class="tactical-box">
+                    <div class="q-number">Question 04</div>
+                    <h3>Perte de communication radio</h3>
+                    <div class="scenario-box"><strong>Situation :</strong> Lors d'une intervention d'envergure, vous perdez subitement tout contact radio avec plusieurs unités engagées.</div>
+                    <div class="question-box"><strong>Question :</strong> Comment réorganisez-vous la situation d'urgence sur le terrain ?</div>
+                </div>
+
+                <div class="tactical-box">
+                    <div class="q-number">Question 05</div>
+                    <h3>Négociation et Opérations</h3>
+                    <div class="scenario-box"><strong>Situation :</strong> Un négociateur est en pleine discussion avec un preneur d'otage.</div>
+                    <div class="question-box"><strong>Question :</strong> Quels éléments précis doivent impérativement être transmis par radio, et lesquels doivent rester strictement limités au cercle de commandement ?</div>
+                </div>
+
+                <div class="tactical-box">
+                    <div class="q-number">Question 06</div>
+                    <h3>Appui aérien (Pilote VIR / DART)</h3>
+                    <div class="scenario-box"><strong>Situation :</strong> Vous opérez en tant que pilote VIR ou DART au-dessus de la zone d'opération.</div>
+                    <div class="question-box"><strong>Question :</strong> Quelles sont les conditions strictes qui vous feraient interrompre immédiatement un appui aérien ?</div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer>
+            <p>Brigade de Recherche et d’Appui &bull; Tous droits réservés</p>
+        </footer>
+    </div>
+
+</body>
+</html>
