@@ -263,7 +263,7 @@
             line-height: 1.4;
         }
 
-        /* Styles pour la nouvelle section / page d'archives photo */
+        /* Grille pour la galerie d'images (Autre page) */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -352,18 +352,23 @@
 <body>
 
     <div class="landscape-container">
+        
+        <!-- En-tête du document -->
         <header>
             <span class="elite-badge">Unité d'Élite &bull; Protocole B.R.A.</span>
             <h1>Brigad Rapid Action</h1>
             <p class="subtitle">Dossier d'Admissibilité, Standards Opérationnels & Évaluation Tactique Avancée</p>
         </header>
 
+        <!-- Grille principale (Panneau Gauche & Panneau Droit) -->
         <div class="dashboard-grid">
             
-            <!-- PANNEAU GAUCHE : PREREQUIS AMELIORES -->
+            <!-- PANNEAU GAUCHE : PREREQUIS D'INTEGRATION -->
             <div class="panel">
                 <h2>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-cyan);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-cyan);">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
                     Section 1 : Protocoles & Prérequis d'Intégration
                 </h2>
                 
@@ -400,10 +405,14 @@
                 </div>
             </div>
 
-            <!-- PANNEAU DROIT : QUESTIONNAIRE TACTIQUE AMELIORE -->
+            <!-- PANNEAU DROIT : QUESTIONNAIRE TACTIQUE -->
             <div class="panel">
                 <h2>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-cyan);"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-cyan);">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
                     Section 2 : Mises en Situation & Ultimatum Tactique
                 </h2>
 
@@ -468,15 +477,20 @@
 
         </div>
 
-        <!-- NOUVELLE SECTION / CATEGORIE A PART : ARCHIVES VISUELLES -->
+        <!-- SECTION : AUTRE PAGE / ARCHIVES VISUELLES -->
         <div class="panel" style="margin-bottom: 30px;">
             <h2>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-purple);"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-purple);">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
                 Autre Page : Archives Visuelles & Captures Tactiques
             </h2>
             
             <div class="gallery-grid">
                 
+                <!-- Image 01 -->
                 <div class="gallery-card">
                     <div class="gallery-img-container">
                         <img src="https://cdn.discordapp.com/attachments/1548462644212531231/1554877290725253152/Capture_decran_2026-09-30_171607.png?backend=b2&ex=6ac5bc12&is=6ac46a92&hm=06364458cca4e4d3f52e8aa5d366aeb5b0161149989e4de7d5a7d625a938da26" alt="Capture d'écran 01">
@@ -487,6 +501,7 @@
                     </div>
                 </div>
 
+                <!-- Image 02 -->
                 <div class="gallery-card">
                     <div class="gallery-img-container">
                         <img src="https://cdn.discordapp.com/attachments/1548462644212531231/1554877291794931815/Capture_decran_2026-09-30_171715.png?backend=b2&ex=6ac5bc12&is=6ac46a92&hm=4c07d89170e0e2cfd8f3aa9a54ae7b3676e92e01bf5bbc43eec8b3efb2c439bf" alt="Capture d'écran 02">
@@ -497,6 +512,7 @@
                     </div>
                 </div>
 
+                <!-- Image 03 -->
                 <div class="gallery-card">
                     <div class="gallery-img-container">
                         <img src="https://cdn.discordapp.com/attachments/1548462644212531231/1554877292574941194/Capture_decran_2026-09-30_171941.png?backend=b2&ex=6ac5bc12&is=6ac46a92&hm=185a0a1e19f07c6145a407802b6f919bb366b4487da9ae5562202dcb86d51d3e" alt="Capture d'écran 03">
@@ -507,6 +523,7 @@
                     </div>
                 </div>
 
+                <!-- Image 04 -->
                 <div class="gallery-card">
                     <div class="gallery-img-container">
                         <img src="https://cdn.discordapp.com/attachments/1548462644212531231/1554877293367918622/Capture_decran_2026-09-30_172100.png?backend=b2&ex=6ac5bc12&is=6ac46a92&hm=af08bd3d000f85f12cf8630971565b88d7bde96bdf573f6cff40be3e8952a4c4" alt="Capture d'écran 04">
@@ -517,6 +534,7 @@
                     </div>
                 </div>
 
+                <!-- Image 05 -->
                 <div class="gallery-card">
                     <div class="gallery-img-container">
                         <img src="https://cdn.discordapp.com/attachments/1548462644212531231/1554877294156193812/Capture_decran_2026-09-30_172649.png?backend=b2&ex=6ac5bc13&is=6ac46a93&hm=6a0da4bb5e5d39c3e63d9502d606098e42d8fdf8ca5f59c3beda14f8d2ab5777" alt="Capture d'écran 05">
@@ -527,6 +545,7 @@
                     </div>
                 </div>
 
+                <!-- Image 06 -->
                 <div class="gallery-card">
                     <div class="gallery-img-container">
                         <img src="https://cdn.discordapp.com/attachments/1548462644212531231/1554878353763475647/Capture_decran_2026-09-30_173125.png?backend=b2&ex=6ac5bd0f&is=6ac46b8f&hm=db648c3b4be71a1da6eb98743e2dcdd20edac386c2bb9b7ad273543d9ff4113b" alt="Capture d'écran 06">
@@ -540,9 +559,11 @@
             </div>
         </div>
 
+        <!-- Pied de page -->
         <footer>
             <p>Brigad Rapid Action (B.R.A.) &bull; Système d'Évaluation Opérationnelle &bull; Usage Interne</p>
         </footer>
+
     </div>
 
 </body>
