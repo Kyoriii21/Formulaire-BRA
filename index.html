@@ -263,11 +263,23 @@
             line-height: 1.4;
         }
 
-        /* Grille pour la galerie d'images (Autre page) */
+        /* Grille fixe à 3 colonnes pour une disposition propre en 3x2 */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .gallery-card {
@@ -485,7 +497,7 @@
                     <circle cx="8.5" cy="8.5" r="1.5"></circle>
                     <polyline points="21 15 16 10 5 21"></polyline>
                 </svg>
-                Autre Page : Archives Visuelles & Captures Tactiques
+                 Section 3 : Archives Visuelles & Positions Tactiques
             </h2>
             
             <div class="gallery-grid">
