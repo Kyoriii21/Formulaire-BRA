@@ -134,27 +134,18 @@
             letter-spacing: 1px;
         }
 
-        /* Section 1 : Grille des prérequis */
+        /* Section 1 : Grille sur une seule colonne pour occuper tout le cadre en largeur */
         .criteria-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
-        }
-
-        @media (max-width: 768px) {
-            .criteria-grid {
-                grid-template-columns: 1fr;
-            }
+            grid-template-columns: 1fr;
+            gap: 14px;
         }
 
         .criteria-card {
             background: rgba(2, 6, 23, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            padding: 18px 20px;
             transition: all 0.3s ease;
         }
 
@@ -167,7 +158,7 @@
         .criteria-card h3 {
             font-size: 1.05rem;
             color: #fff;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -185,7 +176,7 @@
         }
 
         .criteria-card p {
-            font-size: 0.93rem;
+            font-size: 0.9rem;
             color: #cbd5e1;
             line-height: 1.5;
         }
@@ -194,7 +185,7 @@
         .tactical-container {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 16px;
         }
 
         .tac-card {
@@ -480,6 +471,33 @@
                         <h3>Pilote VIR / DART & Reprise des Calls</h3>
                         <div class="tac-scenario"><strong>Contexte :</strong> En tant que pilote VIR/DART impliqué dans une course-poursuite.</div>
                         <div class="tac-question"><strong>Problématique :</strong> Quelles sont les conditions qui vous feraient interrompre immédiatement un appui aérien ?</div>
+                    </div>
+
+                    <div class="tac-card">
+                        <div class="tac-header">
+                            <span class="tac-num">Cas 07</span>
+                        </div>
+                        <h3>Agent Blessé en Zone Active</h3>
+                        <div class="tac-scenario"><strong>Contexte :</strong> Lors d'une intervention, votre binôme est grièvement blessé par balle. Le tireur est toujours actif et représente une menace immédiate.</div>
+                        <div class="tac-question"><strong>Problématique :</strong> Priorisez-vous la neutralisation de la menace ou l'extraction de votre collègue ? Expliquez votre décision.</div>
+                    </div>
+
+                    <div class="tac-card">
+                        <div class="tac-header">
+                            <span class="tac-num">Cas 08</span>
+                        </div>
+                        <h3>Fuite en Zone Bondée</h3>
+                        <div class="tac-scenario"><strong>Contexte :</strong> Un individu armé prend la fuite dans une zone bondée. Vous le perdez de vue quelques secondes.</div>
+                        <div class="tac-question"><strong>Problématique :</strong> Comment coordonnez-vous les unités pour éviter un drame ?</div>
+                    </div>
+
+                    <div class="tac-card">
+                        <div class="tac-header">
+                            <span class="tac-num">Cas 09</span>
+                        </div>
+                        <h3>Reddition Suspecte / Piège Potentiel</h3>
+                        <div class="tac-scenario"><strong>Contexte :</strong> Un individu armé sort d'un bâtiment les mains levées et affirme vouloir se rendre. Plusieurs indices vous font cependant penser qu'il pourrait chercher à attirer les unités dans un piège.</div>
+                        <div class="tac-question"><strong>Problématique :</strong> Comment gérez-vous la situation ?</div>
                     </div>
 
                     <div class="tac-card">
