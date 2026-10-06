@@ -134,74 +134,66 @@
             letter-spacing: 1px;
         }
 
-        /* SECTION 1 : Style Galerie / Cartes pleines en 2 colonnes avec police agrandie */
+        /* Section 1 : Grille sur une seule colonne pour que chaque carte prenne tout le cadre en largeur */
         .criteria-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
-        }
-
-        @media (max-width: 768px) {
-            .criteria-grid {
-                grid-template-columns: 1fr;
-            }
+            grid-template-columns: 1fr;
+            gap: 12px;
         }
 
         .criteria-card {
-            background: rgba(2, 6, 23, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 14px 18px;
             border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .criteria-card:hover {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 5px 20px rgba(6, 182, 212, 0.15);
+            border-color: rgba(6, 182, 212, 0.5);
+            background: rgba(6, 182, 212, 0.04);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.1);
         }
 
         .criteria-card h3 {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             color: #fff;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-weight: 700;
         }
 
         .criteria-card h3::before {
             content: '';
             display: inline-block;
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             background: var(--accent-cyan);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-cyan);
+            box-shadow: 0 0 8px var(--accent-cyan);
         }
 
         .criteria-card p {
-            font-size: 0.93rem;
-            color: #cbd5e1;
-            line-height: 1.5;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.4;
         }
 
-        /* SECTION 2 : Conteneur des mises en situation */
+        /* Section 2 : Conteneur des mises en situation sans scroll */
         .tactical-container {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
 
         .tac-card {
             background: rgba(2, 6, 23, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 12px;
-            padding: 16px 20px;
+            padding: 14px 18px;
             transition: border-color 0.2s ease;
         }
 
@@ -213,50 +205,50 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .tac-num {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 800;
             color: var(--accent-purple);
             text-transform: uppercase;
             letter-spacing: 2px;
             background: rgba(139, 92, 246, 0.1);
-            padding: 3px 10px;
+            padding: 3px 8px;
             border-radius: 6px;
         }
 
         .tac-card h3 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #fff;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 700;
         }
 
         .tac-scenario {
             background: rgba(6, 182, 212, 0.05);
             border-left: 3px solid var(--accent-cyan);
-            padding: 10px 14px;
+            padding: 8px 12px;
             border-radius: 0 8px 8px 0;
-            font-size: 0.9rem;
+            font-size: 0.82rem;
             color: #cbd5e1;
-            margin-bottom: 8px;
-            line-height: 1.45;
+            margin-bottom: 6px;
+            line-height: 1.4;
         }
 
         .tac-question {
             background: rgba(139, 92, 246, 0.04);
             border: 1px dashed rgba(139, 92, 246, 0.3);
-            padding: 10px 14px;
+            padding: 8px 12px;
             border-radius: 8px;
-            font-size: 0.9rem;
+            font-size: 0.82rem;
             color: #f1f5f9;
             font-style: italic;
-            line-height: 1.45;
+            line-height: 1.4;
         }
 
-        /* SECTION 3 : Grille fixe à 3 colonnes pour la galerie d'images */
+        /* Section 3 : Grille fixe à 3 colonnes pour la galerie d'images */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -320,7 +312,7 @@
         }
 
         .gallery-info h3 {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #fff;
         }
 
@@ -330,9 +322,9 @@
             background: rgba(6, 182, 212, 0.1);
             color: var(--accent-cyan);
             border: 1px solid var(--accent-cyan);
-            padding: 9px 12px;
+            padding: 8px 12px;
             border-radius: 6px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             text-decoration: none;
             transition: background 0.2s;
