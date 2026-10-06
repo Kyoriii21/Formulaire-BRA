@@ -137,11 +137,13 @@
             flex-shrink: 0;
         }
 
-        /* Section 1 : Style aligné et harmonisé */
+        /* Section 1 : Grille sur 2 colonnes pour occuper tout l'espace en hauteur sans scroll */
         .criteria-grid {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 14px;
+            align-content: stretch;
+            flex-grow: 1;
         }
 
         .criteria-card {
@@ -149,6 +151,9 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 12px;
             padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             transition: all 0.3s ease;
         }
 
@@ -184,7 +189,7 @@
             line-height: 1.5;
         }
 
-        /* Section 2 : Mises en situation avec glissade (scroll interne stylisé) */
+        /* Section 2 : Défilement (glissade) uniquement pour les cas */
         .tactical-container {
             display: flex;
             flex-direction: column;
@@ -421,15 +426,9 @@
                         <p>Détention obligatoire de l'ensemble des brigades, pilote VIR / DART ainsi que de l'habilitation tactique TIDE.</p>
                     </div>
 
-                    <div class="criteria-card">
-                        <h3>Grade minimum</h3>
+                    <div class="criteria-card" style="grid-column: span 2;">
+                        <h3>Grade minimum & Armement</h3>
                         <p>Être minimum au grade de Sénior Officier. Détention d'une arme Automatique (type : ADP de combat ou M16).</p>
-                    </div>
-
-                    <!-- Encadré supplémentaire pour occuper l'espace vide de manière élégante -->
-                    <div class="criteria-card" style="border-color: rgba(139, 92, 246, 0.4); background: rgba(139, 92, 246, 0.03);">
-                        <h3 style="color: var(--accent-purple);">Consignes d'Évaluation</h3>
-                        <p>Chaque candidat doit répondre aux mises en situation avec rigueur, en démontrant une prise de décision rapide, structurée et conforme aux doctrines de la B.R.A.</p>
                     </div>
                 </div>
             </div>
