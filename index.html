@@ -169,7 +169,7 @@
             flex-shrink: 0;
         }
 
-        /* Section 1 : Grille sur 2 colonnes */
+        /* Section 1 : Grille sur 2 colonnes sans boutons */
         .criteria-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -195,17 +195,10 @@
             transform: translateY(-2px);
         }
 
-        .criteria-header-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            gap: 10px;
-        }
-
         .criteria-card h3 {
             font-size: 1.05rem;
             color: #fff;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -223,44 +216,12 @@
         }
 
         .criteria-card p {
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             color: #cbd5e1;
             line-height: 1.5;
         }
 
-        /* Système de boutons d'évaluation */
-        .score-buttons {
-            display: flex;
-            gap: 4px;
-            flex-shrink: 0;
-        }
-
-        .btn-score {
-            background: rgba(6, 182, 212, 0.08);
-            border: 1px solid rgba(6, 182, 212, 0.3);
-            color: var(--text-muted);
-            padding: 3px 8px;
-            font-family: inherit;
-            font-size: 0.7rem;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-        }
-
-        .btn-score:hover {
-            border-color: var(--accent-cyan);
-            color: #fff;
-        }
-
-        .btn-score.selected {
-            background: var(--accent-cyan);
-            color: #060810;
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 10px var(--neon-glow);
-        }
-
-        /* Section 2 : Défilement (glissade) pour les cas */
+        /* Section 2 : Défilement (glissade) pour les cas avec boutons */
         .tactical-container {
             display: flex;
             flex-direction: column;
@@ -313,6 +274,37 @@
             background: rgba(139, 92, 246, 0.1);
             padding: 3px 10px;
             border-radius: 6px;
+        }
+
+        /* Système de boutons d'évaluation */
+        .score-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-score {
+            background: rgba(6, 182, 212, 0.08);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: var(--text-muted);
+            padding: 4px 10px;
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-score:hover {
+            border-color: var(--accent-cyan);
+            color: #fff;
+        }
+
+        .btn-score.selected {
+            background: var(--accent-cyan);
+            color: #060810;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--neon-glow);
         }
 
         .tac-card h3 {
@@ -453,16 +445,16 @@
             <p class="subtitle">Dossier d'Admissibilité, Standards Opérationnels & Évaluation Tactique Avancée</p>
         </header>
 
-        <!-- WIDGET SCORE TOTAL CALCULÉ AUTOMATIQUEMENT (Total sur 17 points : 7 critères + 10 cas) -->
+        <!-- WIDGET SCORE CALCULÉ POUR LA SECTION 2 (Total sur 10.0 points) -->
         <div class="score-counter-widget">
-            <div class="score-title">📊 Évaluation Opérationnelle &bull; Score Global B.R.A. :</div>
-            <div class="score-value"><span id="total-score">0.0</span> / 17.0 <span id="score-percent" style="font-size: 0.9rem; color: var(--text-muted);">(0%)</span></div>
+            <div class="score-title">📊 Évaluation Tactique &bull; Score Mises en Situation :</div>
+            <div class="score-value"><span id="total-score">0.0</span> / 10.0 <span id="score-percent" style="font-size: 0.9rem; color: var(--text-muted);">(0%)</span></div>
         </div>
 
         <!-- Grille principale (Panneau Gauche & Panneau Droit) -->
         <div class="dashboard-grid">
             
-            <!-- PANNEAU GAUCHE : SECTION 1 -->
+            <!-- PANNEAU GAUCHE : SECTION 1 (Format initial sans boutons) -->
             <div class="panel">
                 <h2>
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-cyan);">
@@ -472,102 +464,44 @@
                 </h2>
                 
                 <div class="criteria-grid">
-                    
-                    <!-- Critère 1 -->
                     <div class="criteria-card">
-                        <div class="criteria-header-flex">
-                            <h3>Maîtrise des Calls Radio</h3>
-                            <div class="score-buttons" data-crit="1">
-                                <button class="btn-score" onclick="setCritScore(1, 0, this)">0</button>
-                                <button class="btn-score" onclick="setCritScore(1, 0.5, this)">0.5</button>
-                                <button class="btn-score" onclick="setCritScore(1, 1, this)">1</button>
-                            </div>
-                        </div>
-                        <p>Excellence absolue en communication radio. Transmissions fluides et calls d'une précision chirurgicale.</p>
+                        <h3>Maîtrise des Calls Radio</h3>
+                        <p>Excellence absolue en communication radio. Transmissions fluides, structure rigoureuse et calls d'une précision chirurgicale sur les secteurs Nord et Sud.</p>
                     </div>
                     
-                    <!-- Critère 2 -->
                     <div class="criteria-card">
-                        <div class="criteria-header-flex">
-                            <h3>Expertise Balistique</h3>
-                            <div class="score-buttons" data-crit="2">
-                                <button class="btn-score" onclick="setCritScore(2, 0, this)">0</button>
-                                <button class="btn-score" onclick="setCritScore(2, 0.5, this)">0.5</button>
-                                <button class="btn-score" onclick="setCritScore(2, 1, this)">1</button>
-                            </div>
-                        </div>
-                        <p>Seuil minimal fixé à 65% de précision, avec une cible d'excellence exigée et recommandée à 75% ou plus.</p>
+                        <h3>Expertise Balistique</h3>
+                        <p>Seuil minimal de réussite fixé à 65% de précision, avec une cible d'excellence exigée et recommandée à 75% ou plus en situation de stress.</p>
                     </div>
 
-                    <!-- Critère 3 -->
                     <div class="criteria-card">
-                        <div class="criteria-header-flex">
-                            <h3>Sang-Froid Tactique</h3>
-                            <div class="score-buttons" data-crit="3">
-                                <button class="btn-score" onclick="setCritScore(3, 0, this)">0</button>
-                                <button class="btn-score" onclick="setCritScore(3, 0.5, this)">0.5</button>
-                                <button class="btn-score" onclick="setCritScore(3, 1, this)">1</button>
-                            </div>
-                        </div>
-                        <p>Maîtrise émotionnelle totale sous haute tension validée lors des simulations d'intervention complexes.</p>
+                        <h3>Sang-Froid Tactique</h3>
+                        <p>Maîtrise émotionnelle totale sous haute tension, validée par la hiérarchie lors des simulations d'intervention complexes et de prises d'otages.</p>
                     </div>
 
-                    <!-- Critère 4 -->
                     <div class="criteria-card">
-                        <div class="criteria-header-flex">
-                            <h3>Gestion des 10.95</h3>
-                            <div class="score-buttons" data-crit="4">
-                                <button class="btn-score" onclick="setCritScore(4, 0, this)">0</button>
-                                <button class="btn-score" onclick="setCritScore(4, 0.5, this)">0.5</button>
-                                <button class="btn-score" onclick="setCritScore(4, 1, this)">1</button>
-                            </div>
-                        </div>
-                        <p>Déploiement méthodologique des dispositifs d'interception couplé à une coordination radio ultra-rapide.</p>
+                        <h3>Gestion des 10.95</h3>
+                        <p>Déploiement méthodologique des dispositifs d'interception, couplé à une coordination radio ultra-rapide et parfaitement compréhensible.</p>
                     </div>
 
-                    <!-- Critère 5 -->
                     <div class="criteria-card">
-                        <div class="criteria-header-flex">
-                            <h3>Intégrité & Discipline</h3>
-                            <div class="score-buttons" data-crit="5">
-                                <button class="btn-score" onclick="setCritScore(5, 0, this)">0</button>
-                                <button class="btn-score" onclick="setCritScore(5, 0.5, this)">0.5</button>
-                                <button class="btn-score" onclick="setCritScore(5, 1, this)">1</button>
-                            </div>
-                        </div>
-                        <p>Posture irréprochable sur le terrain, exemplarité constante et casier disciplinaire rigoureusement vierge.</p>
+                        <h3>Intégrité & Discipline</h3>
+                        <p>Posture irréprochable sur le terrain, exemplarité constante et casier disciplinaire rigoureusement vierge de tout avertissement.</p>
                     </div>
 
-                    <!-- Critère 6 -->
                     <div class="criteria-card">
-                        <div class="criteria-header-flex">
-                            <h3>Toutes les brigades</h3>
-                            <div class="score-buttons" data-crit="6">
-                                <button class="btn-score" onclick="setCritScore(6, 0, this)">0</button>
-                                <button class="btn-score" onclick="setCritScore(6, 0.5, this)">0.5</button>
-                                <button class="btn-score" onclick="setCritScore(6, 1, this)">1</button>
-                            </div>
-                        </div>
+                        <h3>Détention de toutes les brigades</h3>
                         <p>Détention obligatoire de l'ensemble des brigades, pilote VIR / DART ainsi que de l'habilitation tactique TIDE.</p>
                     </div>
 
-                    <!-- Critère 7 -->
                     <div class="criteria-card" style="grid-column: span 2;">
-                        <div class="criteria-header-flex">
-                            <h3>Grade minimum & Armement</h3>
-                            <div class="score-buttons" data-crit="7">
-                                <button class="btn-score" onclick="setCritScore(7, 0, this)">0</button>
-                                <button class="btn-score" onclick="setCritScore(7, 0.5, this)">0.5</button>
-                                <button class="btn-score" onclick="setCritScore(7, 1, this)">1</button>
-                            </div>
-                        </div>
+                        <h3>Grade minimum & Armement</h3>
                         <p>Être minimum au grade de Sénior Officier. Détention d'une arme Automatique (type : ADP de combat ou M16).</p>
                     </div>
-
                 </div>
             </div>
 
-            <!-- PANNEAU DROIT : SECTION 2 (Avec glissade / scrollbar et boutons de notation) -->
+            <!-- PANNEAU DROIT : SECTION 2 (Seule section avec le système de notation) -->
             <div class="panel">
                 <h2>
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-cyan);">
@@ -824,41 +758,25 @@
 
     </div>
 
-    <!-- SCRIPT DE CALCUL AUTOMATIQUE DU SCORE -->
+    <!-- SCRIPT DE CALCUL UNIQUE POUR LA SECTION 2 -->
     <script>
-        const critScores = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
         const caseScores = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0 };
-
-        function setCritScore(critId, points, btnElement) {
-            critScores[critId] = points;
-            updateUI(btnElement);
-        }
 
         function setCaseScore(caseId, points, btnElement) {
             caseScores[caseId] = points;
-            updateUI(btnElement);
-        }
-
-        function updateUI(btnElement) {
+            
             const parent = btnElement.parentElement;
             const buttons = parent.querySelectorAll('.btn-score');
             buttons.forEach(btn => btn.classList.remove('selected'));
             btnElement.classList.add('selected');
-
-            let totalCrit = 0;
-            for (let key in critScores) {
-                totalCrit += critScores[key];
-            }
 
             let totalCases = 0;
             for (let key in caseScores) {
                 totalCases += caseScores[key];
             }
 
-            let total = totalCrit + totalCases;
-
-            document.getElementById('total-score').innerText = total.toFixed(1);
-            const percentage = Math.round((total / 17) * 100);
+            document.getElementById('total-score').innerText = totalCases.toFixed(1);
+            const percentage = Math.round((totalCases / 10) * 100);
             document.getElementById('score-percent').innerText = '(' + percentage + '%)';
         }
     </script>
