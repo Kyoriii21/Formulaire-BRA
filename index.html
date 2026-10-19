@@ -87,6 +87,38 @@
             letter-spacing: 0.5px;
         }
 
+        /* Encart Sticky Score Total */
+        .score-counter-widget {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            background: rgba(13, 19, 33, 0.95);
+            border: 1px solid var(--accent-cyan);
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.25);
+            padding: 12px 25px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            backdrop-filter: blur(12px);
+        }
+
+        .score-title {
+            font-size: 0.9rem;
+            color: #fff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .score-value {
+            font-size: 1.4rem;
+            color: var(--accent-cyan);
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
         .dashboard-grid {
             display: grid;
             grid-template-columns: 1.1fr 1.3fr;
@@ -137,7 +169,7 @@
             flex-shrink: 0;
         }
 
-        /* Section 1 : Grille sur 2 colonnes pour occuper tout l'espace en hauteur sans scroll */
+        /* Section 1 : Grille sur 2 colonnes */
         .criteria-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -163,10 +195,17 @@
             transform: translateY(-2px);
         }
 
+        .criteria-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            gap: 10px;
+        }
+
         .criteria-card h3 {
             font-size: 1.05rem;
             color: #fff;
-            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -184,12 +223,44 @@
         }
 
         .criteria-card p {
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             color: #cbd5e1;
             line-height: 1.5;
         }
 
-        /* Section 2 : Défilement (glissade) uniquement pour les cas */
+        /* Système de boutons d'évaluation */
+        .score-buttons {
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .btn-score {
+            background: rgba(6, 182, 212, 0.08);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: var(--text-muted);
+            padding: 3px 8px;
+            font-family: inherit;
+            font-size: 0.7rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-score:hover {
+            border-color: var(--accent-cyan);
+            color: #fff;
+        }
+
+        .btn-score.selected {
+            background: var(--accent-cyan);
+            color: #060810;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--neon-glow);
+        }
+
+        /* Section 2 : Défilement (glissade) pour les cas */
         .tactical-container {
             display: flex;
             flex-direction: column;
@@ -199,7 +270,6 @@
             padding-right: 8px;
         }
 
-        /* Personnalisation de la barre de défilement */
         .tactical-container::-webkit-scrollbar {
             width: 6px;
         }
@@ -383,6 +453,12 @@
             <p class="subtitle">Dossier d'Admissibilité, Standards Opérationnels & Évaluation Tactique Avancée</p>
         </header>
 
+        <!-- WIDGET SCORE TOTAL CALCULÉ AUTOMATIQUEMENT (Total sur 17 points : 7 critères + 10 cas) -->
+        <div class="score-counter-widget">
+            <div class="score-title">📊 Évaluation Opérationnelle &bull; Score Global B.R.A. :</div>
+            <div class="score-value"><span id="total-score">0.0</span> / 17.0 <span id="score-percent" style="font-size: 0.9rem; color: var(--text-muted);">(0%)</span></div>
+        </div>
+
         <!-- Grille principale (Panneau Gauche & Panneau Droit) -->
         <div class="dashboard-grid">
             
@@ -396,44 +472,102 @@
                 </h2>
                 
                 <div class="criteria-grid">
+                    
+                    <!-- Critère 1 -->
                     <div class="criteria-card">
-                        <h3>Maîtrise des Calls Radio</h3>
-                        <p>Excellence absolue en communication radio. Transmissions fluides, structure rigoureuse et calls d'une précision chirurgicale sur les secteurs Nord et Sud.</p>
+                        <div class="criteria-header-flex">
+                            <h3>Maîtrise des Calls Radio</h3>
+                            <div class="score-buttons" data-crit="1">
+                                <button class="btn-score" onclick="setCritScore(1, 0, this)">0</button>
+                                <button class="btn-score" onclick="setCritScore(1, 0.5, this)">0.5</button>
+                                <button class="btn-score" onclick="setCritScore(1, 1, this)">1</button>
+                            </div>
+                        </div>
+                        <p>Excellence absolue en communication radio. Transmissions fluides et calls d'une précision chirurgicale.</p>
                     </div>
                     
+                    <!-- Critère 2 -->
                     <div class="criteria-card">
-                        <h3>Expertise Balistique</h3>
-                        <p>Seuil minimal de réussite fixé à 65% de précision, avec une cible d'excellence exigée et recommandée à 75% ou plus en situation de stress.</p>
+                        <div class="criteria-header-flex">
+                            <h3>Expertise Balistique</h3>
+                            <div class="score-buttons" data-crit="2">
+                                <button class="btn-score" onclick="setCritScore(2, 0, this)">0</button>
+                                <button class="btn-score" onclick="setCritScore(2, 0.5, this)">0.5</button>
+                                <button class="btn-score" onclick="setCritScore(2, 1, this)">1</button>
+                            </div>
+                        </div>
+                        <p>Seuil minimal fixé à 65% de précision, avec une cible d'excellence exigée et recommandée à 75% ou plus.</p>
                     </div>
 
+                    <!-- Critère 3 -->
                     <div class="criteria-card">
-                        <h3>Sang-Froid Tactique</h3>
-                        <p>Maîtrise émotionnelle totale sous haute tension, validée par la hiérarchie lors des simulations d'intervention complexes et de prises d'otages.</p>
+                        <div class="criteria-header-flex">
+                            <h3>Sang-Froid Tactique</h3>
+                            <div class="score-buttons" data-crit="3">
+                                <button class="btn-score" onclick="setCritScore(3, 0, this)">0</button>
+                                <button class="btn-score" onclick="setCritScore(3, 0.5, this)">0.5</button>
+                                <button class="btn-score" onclick="setCritScore(3, 1, this)">1</button>
+                            </div>
+                        </div>
+                        <p>Maîtrise émotionnelle totale sous haute tension validée lors des simulations d'intervention complexes.</p>
                     </div>
 
+                    <!-- Critère 4 -->
                     <div class="criteria-card">
-                        <h3>Gestion des 10.95</h3>
-                        <p>Déploiement méthodologique des dispositifs d'interception, couplé à une coordination radio ultra-rapide et parfaitement compréhensible.</p>
+                        <div class="criteria-header-flex">
+                            <h3>Gestion des 10.95</h3>
+                            <div class="score-buttons" data-crit="4">
+                                <button class="btn-score" onclick="setCritScore(4, 0, this)">0</button>
+                                <button class="btn-score" onclick="setCritScore(4, 0.5, this)">0.5</button>
+                                <button class="btn-score" onclick="setCritScore(4, 1, this)">1</button>
+                            </div>
+                        </div>
+                        <p>Déploiement méthodologique des dispositifs d'interception couplé à une coordination radio ultra-rapide.</p>
                     </div>
 
+                    <!-- Critère 5 -->
                     <div class="criteria-card">
-                        <h3>Intégrité & Discipline</h3>
-                        <p>Posture irréprochable sur le terrain, exemplarité constante et casier disciplinaire rigoureusement vierge de tout avertissement.</p>
+                        <div class="criteria-header-flex">
+                            <h3>Intégrité & Discipline</h3>
+                            <div class="score-buttons" data-crit="5">
+                                <button class="btn-score" onclick="setCritScore(5, 0, this)">0</button>
+                                <button class="btn-score" onclick="setCritScore(5, 0.5, this)">0.5</button>
+                                <button class="btn-score" onclick="setCritScore(5, 1, this)">1</button>
+                            </div>
+                        </div>
+                        <p>Posture irréprochable sur le terrain, exemplarité constante et casier disciplinaire rigoureusement vierge.</p>
                     </div>
 
+                    <!-- Critère 6 -->
                     <div class="criteria-card">
-                        <h3>Détention de toutes les brigades</h3>
+                        <div class="criteria-header-flex">
+                            <h3>Toutes les brigades</h3>
+                            <div class="score-buttons" data-crit="6">
+                                <button class="btn-score" onclick="setCritScore(6, 0, this)">0</button>
+                                <button class="btn-score" onclick="setCritScore(6, 0.5, this)">0.5</button>
+                                <button class="btn-score" onclick="setCritScore(6, 1, this)">1</button>
+                            </div>
+                        </div>
                         <p>Détention obligatoire de l'ensemble des brigades, pilote VIR / DART ainsi que de l'habilitation tactique TIDE.</p>
                     </div>
 
+                    <!-- Critère 7 -->
                     <div class="criteria-card" style="grid-column: span 2;">
-                        <h3>Grade minimum & Armement</h3>
+                        <div class="criteria-header-flex">
+                            <h3>Grade minimum & Armement</h3>
+                            <div class="score-buttons" data-crit="7">
+                                <button class="btn-score" onclick="setCritScore(7, 0, this)">0</button>
+                                <button class="btn-score" onclick="setCritScore(7, 0.5, this)">0.5</button>
+                                <button class="btn-score" onclick="setCritScore(7, 1, this)">1</button>
+                            </div>
+                        </div>
                         <p>Être minimum au grade de Sénior Officier. Détention d'une arme Automatique (type : ADP de combat ou M16).</p>
                     </div>
+
                 </div>
             </div>
 
-            <!-- PANNEAU DROIT : SECTION 2 (Avec glissade / scrollbar) -->
+            <!-- PANNEAU DROIT : SECTION 2 (Avec glissade / scrollbar et boutons de notation) -->
             <div class="panel">
                 <h2>
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-cyan);">
@@ -446,90 +580,150 @@
 
                 <div class="tactical-container">
                     
+                    <!-- Cas 01 -->
                     <div class="tac-card">
                         <div class="tac-header">
                             <span class="tac-num">Cas 01</span>
+                            <div class="score-buttons" data-case="1">
+                                <button class="btn-score" onclick="setCaseScore(1, 0, this)">0 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(1, 0.5, this)">0.5 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(1, 1, this)">1 pt</button>
+                            </div>
                         </div>
                         <h3>Poursuite à Haute Vitesse & Riposte</h3>
                         <div class="tac-scenario"><strong>Contexte :</strong> Vous êtes en poursuite d'un véhicule à haute vitesse. Le suspect ouvre le feu sur les unités.</div>
                         <div class="tac-question"><strong>Problématique :</strong> À quel moment considérez-vous qu'une intervention plus offensive est nécessaire ?</div>
                     </div>
 
+                    <!-- Cas 02 -->
                     <div class="tac-card">
                         <div class="tac-header">
                             <span class="tac-num">Cas 02</span>
+                            <div class="score-buttons" data-case="2">
+                                <button class="btn-score" onclick="setCaseScore(2, 0, this)">0 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(2, 0.5, this)">0.5 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(2, 1, this)">1 pt</button>
+                            </div>
                         </div>
                         <h3>Sécurisation des Flux Radio</h3>
                         <div class="tac-scenario"><strong>Contexte :</strong> Un agent effectue un mauvais call radio pendant une situation critique, créant de la confusion.</div>
                         <div class="tac-question"><strong>Problématique :</strong> Comment réagissez-vous ?</div>
                     </div>
 
+                    <!-- Cas 03 -->
                     <div class="tac-card">
                         <div class="tac-header">
                             <span class="tac-num">Cas 03</span>
+                            <div class="score-buttons" data-case="3">
+                                <button class="btn-score" onclick="setCaseScore(3, 0, this)">0 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(3, 0.5, this)">0.5 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(3, 1, this)">1 pt</button>
+                            </div>
                         </div>
                         <h3>Prise de position sur PO</h3>
                         <div class="tac-scenario"><strong>Contexte :</strong> Vous arrivez sur une PO impliquant plusieurs suspects.</div>
                         <div class="tac-question"><strong>Problématique :</strong> Quelle disposition choisissez-vous et pourquoi ?</div>
                     </div>
 
+                    <!-- Cas 04 -->
                     <div class="tac-card">
                         <div class="tac-header">
                             <span class="tac-num">Cas 04</span>
+                            <div class="score-buttons" data-case="4">
+                                <button class="btn-score" onclick="setCaseScore(4, 0, this)">0 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(4, 0.5, this)">0.5 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(4, 1, this)">1 pt</button>
+                            </div>
                         </div>
                         <h3>Blackout des Communications</h3>
                         <div class="tac-scenario"><strong>Contexte :</strong> Lors d'une intervention, vous perdez le contact radio avec plusieurs unités.</div>
                         <div class="tac-question"><strong>Problématique :</strong> Comment réorganisez-vous la situation ?</div>
                     </div>
 
+                    <!-- Cas 05 -->
                     <div class="tac-card">
                         <div class="tac-header">
                             <span class="tac-num">Cas 05</span>
+                            <div class="score-buttons" data-case="5">
+                                <button class="btn-score" onclick="setCaseScore(5, 0, this)">0 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(5, 0.5, this)">0.5 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(5, 1, this)">1 pt</button>
+                            </div>
                         </div>
                         <h3>Négociation & Transmission Sensibles</h3>
                         <div class="tac-scenario"><strong>Contexte :</strong> Un négociateur est en discussion avec un preneur d'otage.</div>
                         <div class="tac-question"><strong>Problématique :</strong> Quels éléments doivent être transmis à la radio et lesquels doivent rester limités ?</div>
                     </div>
 
+                    <!-- Cas 06 -->
                     <div class="tac-card">
                         <div class="tac-header">
                             <span class="tac-num">Cas 06</span>
+                            <div class="score-buttons" data-case="6">
+                                <button class="btn-score" onclick="setCaseScore(6, 0, this)">0 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(6, 0.5, this)">0.5 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(6, 1, this)">1 pt</button>
+                            </div>
                         </div>
                         <h3>Pilote VIR / DART & Reprise des Calls</h3>
                         <div class="tac-scenario"><strong>Contexte :</strong> En tant que pilote VIR/DART impliqué dans une course-poursuite.</div>
                         <div class="tac-question"><strong>Problématique :</strong> Quelles sont les conditions qui vous feraient interrompre immédiatement un appui aérien ?</div>
                     </div>
 
+                    <!-- Cas 07 -->
                     <div class="tac-card">
                         <div class="tac-header">
                             <span class="tac-num">Cas 07</span>
+                            <div class="score-buttons" data-case="7">
+                                <button class="btn-score" onclick="setCaseScore(7, 0, this)">0 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(7, 0.5, this)">0.5 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(7, 1, this)">1 pt</button>
+                            </div>
                         </div>
                         <h3>Agent Blessé en Zone Active</h3>
                         <div class="tac-scenario"><strong>Contexte :</strong> Lors d'une intervention, votre binôme est grièvement blessé par balle. Le tireur est toujours actif et représente une menace immédiate.</div>
                         <div class="tac-question"><strong>Problématique :</strong> Priorisez-vous la neutralisation de la menace ou l'extraction de votre collègue ? Expliquez votre décision.</div>
                     </div>
 
+                    <!-- Cas 08 -->
                     <div class="tac-card">
                         <div class="tac-header">
                             <span class="tac-num">Cas 08</span>
+                            <div class="score-buttons" data-case="8">
+                                <button class="btn-score" onclick="setCaseScore(8, 0, this)">0 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(8, 0.5, this)">0.5 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(8, 1, this)">1 pt</button>
+                            </div>
                         </div>
                         <h3>Fuite en Zone Bondée</h3>
                         <div class="tac-scenario"><strong>Contexte :</strong> Un individu armé prend la fuite dans une zone bondée. Vous le perdez de vue quelques secondes.</div>
                         <div class="tac-question"><strong>Problématique :</strong> Comment coordonnez-vous les unités pour éviter un drame ?</div>
                     </div>
 
+                    <!-- Cas 09 -->
                     <div class="tac-card">
                         <div class="tac-header">
                             <span class="tac-num">Cas 09</span>
+                            <div class="score-buttons" data-case="9">
+                                <button class="btn-score" onclick="setCaseScore(9, 0, this)">0 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(9, 0.5, this)">0.5 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(9, 1, this)">1 pt</button>
+                            </div>
                         </div>
                         <h3>Reddition Suspecte / Piège Potentiel</h3>
                         <div class="tac-scenario"><strong>Contexte :</strong> Un individu armé sort d'un bâtiment les mains levées et affirme vouloir se rendre. Plusieurs indices vous font cependant penser qu'il pourrait chercher à attirer les unités dans un piège.</div>
                         <div class="tac-question"><strong>Problématique :</strong> Comment gérez-vous la situation ?</div>
                     </div>
 
+                    <!-- Cas 10 -->
                     <div class="tac-card">
                         <div class="tac-header">
                             <span class="tac-num">Cas 10</span>
+                            <div class="score-buttons" data-case="10">
+                                <button class="btn-score" onclick="setCaseScore(10, 0, this)">0 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(10, 0.5, this)">0.5 pt</button>
+                                <button class="btn-score" onclick="setCaseScore(10, 1, this)">1 pt</button>
+                            </div>
                         </div>
                         <h3>Ultimatum</h3>
                         <div class="tac-scenario"><strong>Contexte :</strong> Lors d'une prise d'otage, le suspect détient plusieurs civils dans un bâtiment. Après plusieurs tentatives de négociation, il vous annonce : "J'ai deux personnes avec moi : M. Blanctitane et M. Samson. Vous avez 2 minutes pour choisir lequel des deux sera exécuté. Si vous refusez de choisir ou si vous tentez de gagner du temps, j'exécute tous les otages présents."</div>
@@ -629,6 +823,45 @@
         </footer>
 
     </div>
+
+    <!-- SCRIPT DE CALCUL AUTOMATIQUE DU SCORE -->
+    <script>
+        const critScores = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
+        const caseScores = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0 };
+
+        function setCritScore(critId, points, btnElement) {
+            critScores[critId] = points;
+            updateUI(btnElement);
+        }
+
+        function setCaseScore(caseId, points, btnElement) {
+            caseScores[caseId] = points;
+            updateUI(btnElement);
+        }
+
+        function updateUI(btnElement) {
+            const parent = btnElement.parentElement;
+            const buttons = parent.querySelectorAll('.btn-score');
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            btnElement.classList.add('selected');
+
+            let totalCrit = 0;
+            for (let key in critScores) {
+                totalCrit += critScores[key];
+            }
+
+            let totalCases = 0;
+            for (let key in caseScores) {
+                totalCases += caseScores[key];
+            }
+
+            let total = totalCrit + totalCases;
+
+            document.getElementById('total-score').innerText = total.toFixed(1);
+            const percentage = Math.round((total / 17) * 100);
+            document.getElementById('score-percent').innerText = '(' + percentage + '%)';
+        }
+    </script>
 
 </body>
 </html>
